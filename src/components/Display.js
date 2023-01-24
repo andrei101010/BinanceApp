@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createChart, ColorType } from "lightweight-charts";
-// import check from '../tradingBot';
+import check from '../tradingBot';
 
 const SMA = require("technicalindicators").SMA;
 
@@ -24,6 +24,30 @@ const Display = ({ data: { data }, settings: { indicatorLength } }) => {
   }
   let tmp = tmp_data.map((item) => item.open);
   let data2 = SMA.calculate({ period: indicatorLength, values: tmp });
+  //   if(settings.buyConditionPrice === "open") {
+  //     let new_data = [...settings];
+  //     new_data.currentPrice = tmp_data[tmp_data.length - 1].open;
+  //     new_data.sma = data2[data2.length - 1];
+  //     check(new_data);
+  //   }
+  //   if(settings.buyConditionPrice === "high") {
+  //     let new_data = [...settings];
+  //     new_data.currentPrice = tmp_data[tmp_data.length - 1].high;
+  //     new_data.sma = data2[data2.length - 1];
+  //     check(new_data);
+  //   }
+  //   if(settings.buyConditionPrice === "low") {
+  //     let new_data = [...settings];
+  //     new_data.currentPrice = tmp_data[tmp_data.length - 1].low;
+  //     new_data.sma = data2[data2.length - 1];
+  //     check(new_data);
+  //   }
+  //   if(settings.buyConditionPrice === "close") {
+  //     let new_data = [...settings];
+  //     new_data.currentPrice = tmp_data[tmp_data.length - 1].close;
+  //     new_data.sma = data2[data2.length - 1];
+  //     check(new_data);
+  //   }
   let data1 = [];
   for (let i = indicatorLength - 1; i < tmp_data.length; i++) {
     tmp = { time: tmp_data[i].time, value: data2[i - indicatorLength + 1] };

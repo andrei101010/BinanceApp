@@ -14,7 +14,7 @@ import Display from "../Display";
 
 // Trade Setting Component
 const Trade = ({
-  settings: { pair, timeFrame },
+  settings: { pair, timeframe },
   data: { isLoading, data },
 }) => {
   const dispatch = useDispatch(); // dispatch for redux
@@ -32,7 +32,7 @@ const Trade = ({
           onClick={() => {
             const params = {
               pair: pair,
-              timeFrame: timeFrame,
+              timeframe: timeframe,
             };
             setInterval(() => {
               dispatch(loadData(params));
