@@ -1,0 +1,22 @@
+export const SET_PAIR = "SET_PAIR";
+
+export const SET_TIME_FRAME = "SET_TIME_FRAME";
+
+export const SET_INDICATOR_LENGTH = "SET_INDICATOR_LENGTH";
+export const SET_INDICATOR_PARAMS = "SET_INDICATOR_PARAMS";
+
+export const SET_BUY_CONDITION_GOES = "SET_BUY_CONDITION_GOES";
+export const SET_BUY_CONDITION_PRICE = "SET_BUY_CONDITION_PRICE";
+
+export const SET_SELL_PRICE = "SET_SELL_PRICE";
+export const SET_QUANTITY_TYPE = "SET_QUANTITY_TYPE";
+export const SET_QUANTITY_PERCENTAGE = "SET_QUANTITY_PERCENTAGE";
+
+export const IS_DATA_LOADING = "IS_DATA_LOADING";
+export const DATA_LOADED = "DATA_LOADED";
+
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGOUT = "LOGOUT";
+
+export const ABOVE = "above";
+export const BELOW = "below";
