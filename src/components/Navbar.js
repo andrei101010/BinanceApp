@@ -1,6 +1,8 @@
+// import basics
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
+// Navbar Component
 const Navbar = () => {
   return (
     <>
@@ -11,7 +13,7 @@ const Navbar = () => {
               .filter(Boolean)
               .join(" ")
           }
-          to="/binance/settings/ticker"
+          to="/binance/settings"
         >
           Create Trade
         </NavLink>

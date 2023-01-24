@@ -1,15 +1,20 @@
+//import basics
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
+// import redux actions
 import {
   setIndicatorLength,
   setIndicatorParams,
 } from "../../store/actions/settingsAction";
 
+// Indicator Setting Component
 const Indicator = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch(); // dispatch for redux
+  const navigate = useNavigate(); // navigate for move action
+
+  // define controllable ref
   const indicatorLengthRef = useRef(null);
 
   return (
@@ -41,11 +46,12 @@ const Indicator = () => {
       <button
         className="next-btn"
         onClick={() => {
+          // validation
           if (indicatorLengthRef.current.value === "")
             indicatorLengthRef.current.classList.add("invalid");
           else {
             indicatorLengthRef.current.classList.remove("invalid");
-            navigate("/binance/settings/buy_condition");
+            navigate("/binance/settings/buycondition"); // move to next setting
           }
         }}
       >

@@ -1,12 +1,17 @@
+// import basics
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
+// import redux actions
 import { setSellPrice } from "../../store/actions/settingsAction";
 
+// SellCondition Setting Component
 const SellCondition = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch(); // dispatch for redux
+  const navigate = useNavigate(); // navigate for move action
+
+  // define controllable ref
   const sellPriceRef = useRef(null);
 
   return (
@@ -23,6 +28,7 @@ const SellCondition = () => {
       <button
         className="next-btn"
         onClick={() => {
+          // validation
           if (sellPriceRef.current.value === "")
             sellPriceRef.current.classList.add("invalid");
           else {

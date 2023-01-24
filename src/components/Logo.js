@@ -1,5 +1,6 @@
 import React from "react";
 
+// Top Logo Component
 const Logo = () => {
   return (
     <div className="image-cover">

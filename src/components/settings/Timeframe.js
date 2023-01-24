@@ -1,12 +1,16 @@
+// import basics
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { setTimeFrame } from "../../store/actions/settingsAction";
+// import redux action
+import { setTimeframe } from "../../store/actions/settingsAction";
 
-const timeFrameList = ["1m", "5m", "10m", "15m", "30m", "1h"];
+// declare timeframes' list
+const timeframeList = ["1m", "5m", "10m", "15m", "30m", "1h"];
 
-const TimeFrame = () => {
+// Timeframe Setting Component
+const Timeframe = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -16,9 +20,9 @@ const TimeFrame = () => {
       <label>Timeframe </label>
       <select
         className="select-box"
-        onChange={(e) => dispatch(setTimeFrame(e.target.value))}
+        onChange={(e) => dispatch(setTimeframe(e.target.value))}
       >
-        {timeFrameList.map((timeframe) => (
+        {timeframeList.map((timeframe) => (
           <option value={timeframe} key={timeframe}>
             {timeframe}
           </option>
@@ -34,4 +38,4 @@ const TimeFrame = () => {
   );
 };
 
-export default TimeFrame;
+export default Timeframe;

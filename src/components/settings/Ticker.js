@@ -1,14 +1,21 @@
+// import basics
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+
+// import redux actions
 import { setPair } from "../../store/actions/settingsAction";
 
+// Ticker Setting Component
 const Ticker = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch(); // dispatch for redux
+  const navigate = useNavigate(); // navigate for move action
+
+  // define state
   const [pairs, setPairs] = useState([]);
 
   useEffect(() => {
+    // fetch action for currency-pairs
     fetch("https://api.binance.com/api/v1/exchangeInfo")
       .then((response) => response.json())
       .then((data) => setPairs(data.symbols));
@@ -23,18 +30,20 @@ const Ticker = () => {
         onChange={(e) => dispatch(setPair(e.target.value))}
       >
         <option value="BTCUSDT" key={999}>
-            BTCUSDT
-          </option>
+          BTCUSDT
+        </option>
         {pairs.map((pair, key) => (
           <option value={pair.symbol} key={key}>
             {pair.symbol}
           </option>
         ))}
       </select>
-      <button 
+      <button
         className="next-btn"
-        onClick={() => navigate("/binance/settings/time_frame")}
-      >Next &gt;&gt;</button>
+        onClick={() => navigate("/binance/settings/timeframe")}
+      >
+        Next &gt;&gt;
+      </button>
     </div>
   );
 };

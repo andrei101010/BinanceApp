@@ -9,6 +9,7 @@ body{
   color: white;
 }
 
+/*******************  Logo  *********************/
 .image-cover{
   display: flex;
   justify-content:center;
@@ -114,7 +115,7 @@ body{
   flex: 3;
 }
 
-/* loader */
+/*******************  Loader  *********************/
 .loader, .loader:before, .loader:after {
   border-radius: 50%;
   width: 2.5em;
@@ -149,27 +150,28 @@ body{
   40% { box-shadow: 0 2.5em 0 0 }
 }
 
-.login-container {
+/*******************  Auth Pages  *********************/
+.login-container, .signup-container, .verify {
   margin-top: 30px;
+  text-align: center;
+}
+
+.login-form, .signup-form, .verify-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.login-container * {
+.login-form *, .signup-form *, .verify-form * {
   margin-top: 30px;
 }
 
-.login-btn {
+.login-btn, .signup-btn, .code-btn {
   border: none;
   padding: 10px 40px;
 }
 
-.auth-etc a {
+.auth-etc a, p a {
   color: white;
-}
-
-.register-btn {
-  margin-left: 50px;
 }
