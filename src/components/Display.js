@@ -7,7 +7,7 @@ import check from '../tradingBot';
 
 const SMA = require("technicalindicators").SMA;
 
-const Display = ({ data: { data }, settings: { indicatorLength } }) => {
+const Display = ({ data: { data }, settings}) => {
   const tmp_data = [];
   for (let item of data) {
     // const date = new Date(item[0]);
@@ -19,41 +19,39 @@ const Display = ({ data: { data }, settings: { indicatorLength } }) => {
       low: parseFloat(item[3]),
       close: parseFloat(item[4]),
     };
-    console.log(tmp);
     tmp_data.push(tmp);
   }
   let tmp = tmp_data.map((item) => item.open);
-  let data2 = SMA.calculate({ period: indicatorLength, values: tmp });
-  //   if(settings.buyConditionPrice === "open") {
-  //     let new_data = [...settings];
-  //     new_data.currentPrice = tmp_data[tmp_data.length - 1].open;
-  //     new_data.sma = data2[data2.length - 1];
-  //     check(new_data);
-  //   }
-  //   if(settings.buyConditionPrice === "high") {
-  //     let new_data = [...settings];
-  //     new_data.currentPrice = tmp_data[tmp_data.length - 1].high;
-  //     new_data.sma = data2[data2.length - 1];
-  //     check(new_data);
-  //   }
-  //   if(settings.buyConditionPrice === "low") {
-  //     let new_data = [...settings];
-  //     new_data.currentPrice = tmp_data[tmp_data.length - 1].low;
-  //     new_data.sma = data2[data2.length - 1];
-  //     check(new_data);
-  //   }
-  //   if(settings.buyConditionPrice === "close") {
-  //     let new_data = [...settings];
-  //     new_data.currentPrice = tmp_data[tmp_data.length - 1].close;
-  //     new_data.sma = data2[data2.length - 1];
-  //     check(new_data);
-  //   }
+  let data2 = SMA.calculate({ period: settings.indicatorLength, values: tmp });
+    if(settings.buyConditionPrice === "open") {
+      let new_data = [...settings];
+      new_data.currentPrice = tmp_data[tmp_data.length - 1].open;
+      new_data.sma = data2[data2.length - 1];
+      console.log(check(new_data));
+    }
+    if(settings.buyConditionPrice === "high") {
+      let new_data = [...settings];
+      new_data.currentPrice = tmp_data[tmp_data.length - 1].high;
+      new_data.sma = data2[data2.length - 1];
+      check(new_data);
+    }
+    if(settings.buyConditionPrice === "low") {
+      let new_data = [...settings];
+      new_data.currentPrice = tmp_data[tmp_data.length - 1].low;
+      new_data.sma = data2[data2.length - 1];
+      check(new_data);
+    }
+    if(settings.buyConditionPrice === "close") {
+      let new_data = [...settings];
+      new_data.currentPrice = tmp_data[tmp_data.length - 1].close;
+      new_data.sma = data2[data2.length - 1];
+      check(new_data);
+    }
   let data1 = [];
-  for (let i = indicatorLength - 1; i < tmp_data.length; i++) {
-    tmp = { time: tmp_data[i].time, value: data2[i - indicatorLength + 1] };
+  for (let i = settings.indicatorLength - 1; i < tmp_data.length; i++) {
+    tmp = { time: tmp_data[i].time, value: data2[i - settings.indicatorLength + 1] };
     data1.push(tmp);
   }
-  console.log(tmp_data[0].time);
 
   const chartContainerRef = useRef();
   useEffect(() => {

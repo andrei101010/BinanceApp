@@ -36,7 +36,7 @@ const Trade = ({
             };
             setInterval(() => {
               dispatch(loadData(params));
-            }, 1000);
+            }, 5000);
             setStop(!stop);
           }}
         >
