@@ -1,26 +1,27 @@
+// import action types
 import {
-  SET_BUY_CONDITION_PRICE,
-  SET_BUY_CONDITION_GOES,
+  SET_BUYCONDITION_PRICE,
+  SET_BUYCONDITOIN_GOES,
   SET_INDICATOR_LENGTH,
   SET_INDICATOR_PARAMS,
   SET_PAIR,
   SET_QUANTITY_PERCENTAGE,
   SET_QUANTITY_TYPE,
-  SET_SELL_PRICE,
-  SET_TIME_FRAME,
+  SET_SELLPRICE,
+  SET_TIMEFRAME,
 } from "../actions/types";
 
+// settings store initial state
 const initialState = {
-  pair: "BTCUSDT",
-  timeFrame: "1m",
-  indicatorLength: null,
-  indicatorParams: "Open",
-  buyConditionGoes: "above",
-  buyConditionPrice: "Open",
-  sellPrice: null,
-  quantityType: "amount",
-  quantityPercentage: null,
-  isDataLoading: false,
+  pair: "BTCUSDT", // currency-pair [BTCUSDT]
+  timeframe: "1m", // timeframe  [1m, 5m, 10m, 15m, 30m, 1h]
+  indicatorLength: null, // indicator-length
+  indicatorParams: "Open", // indicator-params [Open, Low, High, Close]
+  buyconditionGoes: "above", // buycondition-goes [above, below]
+  buyconditionPrice: "Open", // buyconditoin-price [Open, Low, High, Close]
+  sellPrice: null, // sell-price
+  quantityType: "amount", // quantity-type [amount, volume]
+  quantityPercentage: null, // quantity-percentage
 };
 
 /* eslint import/no-anonymous-default-export: [2, {"allowArrowFunction": true}] */
@@ -31,10 +32,10 @@ export default (state = initialState, action) => {
         ...state,
         pair: action.payload,
       };
-    case SET_TIME_FRAME:
+    case SET_TIMEFRAME:
       return {
         ...state,
-        timeFrame: action.payload,
+        timeframe: action.payload,
       };
     case SET_INDICATOR_LENGTH:
       return {
@@ -46,17 +47,17 @@ export default (state = initialState, action) => {
         ...state,
         indicatorParams: action.payload,
       };
-    case SET_BUY_CONDITION_GOES:
+    case SET_BUYCONDITOIN_GOES:
       return {
         ...state,
-        buyConditionGoes: action.payload,
+        buyconditionGoes: action.payload,
       };
-    case SET_BUY_CONDITION_PRICE:
+    case SET_BUYCONDITION_PRICE:
       return {
         ...state,
-        buyConditionPrice: action.payload,
+        buyconditionPrice: action.payload,
       };
-    case SET_SELL_PRICE:
+    case SET_SELLPRICE:
       return {
         ...state,
         sellPrice: action.payload,
@@ -74,4 +75,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-}
+};

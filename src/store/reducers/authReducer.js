@@ -1,19 +1,21 @@
+// import action types
 import { LOGIN_SUCCESS, LOGOUT } from "../actions/types";
 
+// auth store initial state
 const initialState = {
-  authenticated: false,
-  user: null,
+  authenticated: false, // is authenticated
+  user: null, // user info
 };
 
-/* eslint import/no-anonymous-default-export: [2, {"allowAnonymousFunction": true}] */
-export default function (state = initialState, action) {
+/* eslint import/no-anonymous-default-export: [2, {"allowArrowFunction": true}] */
+export default (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_SUCCESS:
+    case LOGIN_SUCCESS: // if login success
       return {
         authenticated: false,
         user: action.payload,
       };
-    case LOGOUT:
+    case LOGOUT: // logout action
       return {
         authenticated: false,
         user: null,
@@ -21,4 +23,4 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+};

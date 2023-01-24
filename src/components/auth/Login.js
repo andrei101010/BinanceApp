@@ -1,44 +1,58 @@
+// import basics
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
+// import action
 import { loginAction } from "../../store/actions/authAction";
 
+// Login Page
 const Login = () => {
+  // dispatch for redux
   const dispatch = useDispatch();
+
+  // define states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // form submit handle function
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // clear inputs
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <div className="login-container">
       <h1>Please sign in by entering details below</h1>
-      <input
-        type="text"
-        placeholder="Enter Email"
-        className={"select-box" + (email === "" ? " invalid" : "")}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Enter Password"
-        className={"select-box" + (password === "" ? " invalid" : "")}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button
-        className="login-btn"
-        onClick={() => {
-          if (email !== "" && password !== "")
-            dispatch(loginAction({ email, password }));
-        }}
-      >
-        Login
-      </button>
-      <div className="auth-etc">
-        <NavLink to="forgot-password">Forgot Password?</NavLink>
-        <NavLink to="/register" className="register-btn">
-          New user?
-        </NavLink>
-      </div>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Enter Email"
+          className="select-box"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Enter Password"
+          className="select-box"
+          required
+          value={password}
+          minLength={8}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button className="login-btn">Login</button>
+        <div className="auth-etc">
+          <NavLink to="/forgot-password">Forgot Password?</NavLink>
+          <NavLink to="/register" style={{ marginLeft: 50 }}>
+            New user?
+          </NavLink>
+        </div>
+      </form>
     </div>
   );
 };
