@@ -31,8 +31,9 @@ module.exports = function (config, env) {
         // assert: require.resolve("assert/"),
         // buffer: require.resolve("buffer/"),
         // path: require.resolve("path-browserify"),
-        crypto: require.resolve("crypto-browserify")
+        crypto: require.resolve("crypto-browserify"),
         // os: require.resolve("os-browserify/browser"),
+        tls: false,
       },
     },
     ignoreWarnings: [/Failed to parse source map/],
