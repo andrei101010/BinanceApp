@@ -14,9 +14,14 @@ const start_bot = async (data, settings) => {
     return;
   }
 
-  console.log(await client.openOrders({ symbol: 'ETHBTC'}));
-  return;
-
+  let order = await client.openOrders({ symbol: settings.pair, recvWindow: '60000'});
+  if(order.length > 0)  {
+    console.log("already exists");
+    return {
+      status: 0,
+      message: "There is already trading with this pair"
+    };
+  }
   const real_data = [];
   for (let item of data) {
     let tmp = {
@@ -39,13 +44,6 @@ const start_bot = async (data, settings) => {
     sma_data.push(tmp);
   }
 
-  console.log(
-    await client.openOrders({
-      symbol: settings.pair,
-    }),
-  );
-  return;
-
   if (settings.buyconditionGoes === "above") {
     let currentPrice;
     let smaPrice = sma_data[sma_data.length - 1].value;
@@ -57,12 +55,15 @@ const start_bot = async (data, settings) => {
       currentPrice = real_data[real_data.length - 1].low;
     if (settings.buyconditionPrice === "close")
       currentPrice = real_data[real_data.length - 1].close;
-    console.log("current : " + currentPrice + " sma : " + smaPrice);
+    console.log("above current:"+currentPrice+"sma:"+smaPrice);
     if (currentPrice > smaPrice) {
       let params = {
         symbol: settings.pair,
         side: "BUY",
         quantity: 0.1,
+        recvWindow: 6000,
+        price: currentPrice,
+        stopPrice: currentPrice - settings.sellPrice * 1
       };
       await client.order(params);
     }
@@ -77,12 +78,15 @@ const start_bot = async (data, settings) => {
       currentPrice = real_data[real_data.length - 1].low;
     if (settings.buyconditionPrice === "close")
       currentPrice = real_data[real_data.length - 1].close;
-    console.log("current : " + currentPrice + " sma : " + smaPrice);
+    console.log("below current:"+currentPrice+"sma:"+smaPrice);
     if (currentPrice < smaPrice) {
       let params = {
         symbol: settings.pair,
         side: "SELL",
         quantity: 0.1,
+        recvWindow: 6000,
+        price: currentPrice,
+        stopPrice: currentPrice - settings.sellPrice * 1
       };
       await client.order(params);
     }
