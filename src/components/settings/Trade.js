@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 
 // import redux action
 import { loadData } from "../../store/actions/dataAction";
+import start_bot from '../../tradingBot';
 
 // import custom components
 import Spinner from "../Spinner";
@@ -14,10 +15,9 @@ import Display from "../Display";
 
 // Trade Setting Component
 const Trade = ({
-  settings: { pair, timeframe },
+  settings,
   data: { isLoading, data },
 }) => {
-  const dispatch = useDispatch(); // dispatch for redux
   const navigate = useNavigate(); // navigate for move action
 
   // define state
@@ -30,14 +30,8 @@ const Trade = ({
         <button
           className="next-btn"
           onClick={() => {
-            const params = {
-              pair: pair,
-              timeframe: timeframe,
-            };
-            setInterval(() => {
-              dispatch(loadData(params));
-            }, 5000);
             setStop(!stop);
+            // setInterval(() => start_bot(data, settings), 1000);
           }}
         >
           {!stop ? "Place a trade" : "Stop"}

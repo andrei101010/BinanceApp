@@ -3,16 +3,13 @@ import { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createChart, ColorType } from "lightweight-charts";
-import check from '../tradingBot';
 
 const SMA = require("technicalindicators").SMA;
 
-const Display = ({ data: { data }, settings}) => {
+const Display = ({ data: { data }, settings }) => {
   const tmp_data = [];
   for (let item of data) {
-    // const date = new Date(item[0]);
     let tmp = {
-      //   time: date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
       time: item[0],
       open: parseFloat(item[1]),
       high: parseFloat(item[2]),
@@ -23,33 +20,12 @@ const Display = ({ data: { data }, settings}) => {
   }
   let tmp = tmp_data.map((item) => item.open);
   let data2 = SMA.calculate({ period: settings.indicatorLength, values: tmp });
-    if(settings.buyConditionPrice === "open") {
-      let new_data = [...settings];
-      new_data.currentPrice = tmp_data[tmp_data.length - 1].open;
-      new_data.sma = data2[data2.length - 1];
-      console.log(check(new_data));
-    }
-    if(settings.buyConditionPrice === "high") {
-      let new_data = [...settings];
-      new_data.currentPrice = tmp_data[tmp_data.length - 1].high;
-      new_data.sma = data2[data2.length - 1];
-      check(new_data);
-    }
-    if(settings.buyConditionPrice === "low") {
-      let new_data = [...settings];
-      new_data.currentPrice = tmp_data[tmp_data.length - 1].low;
-      new_data.sma = data2[data2.length - 1];
-      check(new_data);
-    }
-    if(settings.buyConditionPrice === "close") {
-      let new_data = [...settings];
-      new_data.currentPrice = tmp_data[tmp_data.length - 1].close;
-      new_data.sma = data2[data2.length - 1];
-      check(new_data);
-    }
   let data1 = [];
   for (let i = settings.indicatorLength - 1; i < tmp_data.length; i++) {
-    tmp = { time: tmp_data[i].time, value: data2[i - settings.indicatorLength + 1] };
+    tmp = {
+      time: tmp_data[i].time,
+      value: data2[i - settings.indicatorLength + 1],
+    };
     data1.push(tmp);
   }
 
