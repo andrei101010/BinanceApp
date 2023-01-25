@@ -19,7 +19,7 @@ const Trade = ({
   data: { isLoading, data },
 }) => {
   const navigate = useNavigate(); // navigate for move action
-
+  const dispatch = useDispatch(); // dispatch for redux
   // define state
   const [stop, setStop] = useState(false);
 
@@ -31,7 +31,7 @@ const Trade = ({
           className="next-btn"
           onClick={() => {
             setStop(!stop);
-            setInterval(() => start_bot(data, settings), 1000);
+            setInterval(() => start_bot(data, settings, dispatch), 1000);
           }}
         >
           {!stop ? "Place a trade" : "Stop"}

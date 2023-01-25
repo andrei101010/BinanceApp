@@ -1,13 +1,15 @@
 import Binance from 'binance-api-node';
+
+// import redux actions
+import { orderSelected } from "./store/actions/dataAction";
+
+
 const SMA = require("technicalindicators").SMA;
 
-const start_bot = async (data, settings) => {
+const start_bot = async (data, settings, dispatch) => {
   const client = Binance({
-    // apiKey: localStorage.getItem("APIKEY"),
-    // apiSecret: localStorage.getItem("APISECRET"),
-    apiKey: "4nb1Evb6bNJctw4K4ZubaPHVJKlTdtZ8Qhx3PNRhZJu5LeNXCMczdmjnNxvbzGIN",
-    apiSecret:
-      "xImFiiEiWWZK1OoV2yaUqrYmBiu7Z9S4WPDgOGQFWyNjm0O4zwmANeHWA1foN6sh",
+    apiKey: localStorage.getItem("APIKEY"),
+    apiSecret: localStorage.getItem("APISECRET"),
   });
   if (!client) {
     alert("There is no APIKEY and APISECRET in localStorage");
@@ -55,7 +57,7 @@ const start_bot = async (data, settings) => {
       currentPrice = real_data[real_data.length - 1].low;
     if (settings.buyconditionPrice === "close")
       currentPrice = real_data[real_data.length - 1].close;
-    console.log("above current:"+currentPrice+"sma:"+smaPrice);
+      console.log('above current:'+currentPrice+"sma:"+smaPrice);
     if (currentPrice > smaPrice) {
       let params = {
         symbol: settings.pair,
@@ -65,6 +67,13 @@ const start_bot = async (data, settings) => {
         price: currentPrice,
         stopPrice: currentPrice - settings.sellPrice * 1
       };
+      const payload = {
+        type: 'buy',
+        time: real_data[real_data.length - 1].time,
+        price: currentPrice
+      }
+      console.log(payload);
+      dispatch(orderSelected(payload));
       await client.order(params);
     }
   } else {
@@ -78,7 +87,7 @@ const start_bot = async (data, settings) => {
       currentPrice = real_data[real_data.length - 1].low;
     if (settings.buyconditionPrice === "close")
       currentPrice = real_data[real_data.length - 1].close;
-    console.log("below current:"+currentPrice+"sma:"+smaPrice);
+    console.log('below current:'+currentPrice+"sma:"+smaPrice);
     if (currentPrice < smaPrice) {
       let params = {
         symbol: settings.pair,
@@ -88,6 +97,13 @@ const start_bot = async (data, settings) => {
         price: currentPrice,
         stopPrice: currentPrice - settings.sellPrice * 1
       };
+      const payload = {
+        type: 'sell',
+        time: real_data[real_data.length - 1].time,
+        price: currentPrice
+      }
+      console.log(payload);
+      dispatch(orderSelected(payload));
       await client.order(params);
     }
   }

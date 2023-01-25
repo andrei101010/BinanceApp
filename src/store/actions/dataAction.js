@@ -1,4 +1,4 @@
-import { IS_DATA_LOADING, DATA_LOADED } from "./types";
+import { IS_DATA_LOADING, DATA_LOADED, ORDER_SELECTED } from "./types";
 import axios from 'axios';
 
 export const loadData = (params) => (dispatch) => {
@@ -10,3 +10,7 @@ export const loadData = (params) => (dispatch) => {
             dispatch({type: DATA_LOADED, payload: data});
         })
   };
+
+export const orderSelected = (params) => (dispatch) => {
+    dispatch({type: ORDER_SELECTED, payload: params});
+}

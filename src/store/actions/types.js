@@ -15,6 +15,7 @@ export const LOGOUT = "LOGOUT";
 
 export const IS_DATA_LOADING = "IS_DATA_LOADING";
 export const DATA_LOADED = "DATA_LOADED";
+export const ORDER_SELECTED = "ORDER_SELECTED";
 
 export const ABOVE = "above";
 export const BELOW = "below";
