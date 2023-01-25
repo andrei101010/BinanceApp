@@ -1,5 +1,9 @@
+import { SET_APIINFO } from "./types";
+
 // Login Action
 export const loginAction = (userData, navigate) => (dispatch) => {
+  navigate("/apiinfo");
+  return;
   fetch("http://localhost:4000/api/login", {
     method: "POST",
     body: JSON.stringify(userData),
@@ -17,7 +21,7 @@ export const loginAction = (userData, navigate) => (dispatch) => {
         //👇🏻 save the username to the local storage
         localStorage.setItem("username", data.data.username);
         //👇🏻 Navigates to the 2FA route
-        navigate("/phone/verify");
+        navigate("/apiinfo");
       }
     })
     .catch((err) => console.error(err));
@@ -64,4 +68,11 @@ export const verifyAction = (code, navigate) => (dispatch) => {
       }
     })
     .catch((err) => console.error(err));
+};
+
+export const setApiAction = (apiinfo, navigate) => (dispatch) => {
+  localStorage.setItem("APIKEY", apiinfo.apikey);
+  localStorage.setItem("APISECRET", apiinfo.secret);
+  dispatch({ type: SET_APIINFO, payload: apiinfo });
+  navigate("/binance");
 };

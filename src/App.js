@@ -27,6 +27,7 @@ import Log from "./components/log";
 import Active from "./components/active";
 import SignUp from "./components/auth/SignUp";
 import PhoneVerify from "./components/auth/PhoneVerify";
+import ApiInfo from "./components/auth/ApiInfo";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<SignUp />} />
             <Route path="/phone/verify" element={<PhoneVerify />} />
+            <Route path="/apiinfo" element={<ApiInfo />} />
             <Route path="/binance" element={<Navbar />}>
               <Route path="" element={<Navigate to="settings" />} />
               <Route path="settings" element={<Settings />}>

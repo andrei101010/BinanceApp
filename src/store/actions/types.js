@@ -18,3 +18,6 @@ export const DATA_LOADED = "DATA_LOADED";
 
 export const ABOVE = "above";
 export const BELOW = "below";
+
+// API Info Action Types
+export const SET_APIINFO = "SET_APIINFO";
