@@ -3,33 +3,31 @@ import { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createChart, ColorType } from "lightweight-charts";
-// import check from '../tradingBot';
 
 const SMA = require("technicalindicators").SMA;
 
-const Display = ({ data: { data }, settings: { indicatorLength } }) => {
+const Display = ({ data: { data }, settings }) => {
   const tmp_data = [];
   for (let item of data) {
-    // const date = new Date(item[0]);
     let tmp = {
-      //   time: date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
       time: item[0],
       open: parseFloat(item[1]),
       high: parseFloat(item[2]),
       low: parseFloat(item[3]),
       close: parseFloat(item[4]),
     };
-    console.log(tmp);
     tmp_data.push(tmp);
   }
   let tmp = tmp_data.map((item) => item.open);
-  let data2 = SMA.calculate({ period: indicatorLength, values: tmp });
+  let data2 = SMA.calculate({ period: settings.indicatorLength, values: tmp });
   let data1 = [];
-  for (let i = indicatorLength - 1; i < tmp_data.length; i++) {
-    tmp = { time: tmp_data[i].time, value: data2[i - indicatorLength + 1] };
+  for (let i = settings.indicatorLength - 1; i < tmp_data.length; i++) {
+    tmp = {
+      time: tmp_data[i].time,
+      value: data2[i - settings.indicatorLength + 1],
+    };
     data1.push(tmp);
   }
-  console.log(tmp_data[0].time);
 
   const chartContainerRef = useRef();
   useEffect(() => {

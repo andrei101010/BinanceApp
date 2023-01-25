@@ -16,9 +16,9 @@ const initialState = {
   pair: "BTCUSDT", // currency-pair [BTCUSDT]
   timeframe: "1m", // timeframe  [1m, 5m, 10m, 15m, 30m, 1h]
   indicatorLength: null, // indicator-length
-  indicatorParams: "Open", // indicator-params [Open, Low, High, Close]
+  indicatorParams: "open", // indicator-params [Open, Low, High, Close]
   buyconditionGoes: "above", // buycondition-goes [above, below]
-  buyconditionPrice: "Open", // buyconditoin-price [Open, Low, High, Close]
+  buyconditionPrice: "open", // buyconditoin-price [Open, Low, High, Close]
   sellPrice: null, // sell-price
   quantityType: "amount", // quantity-type [amount, volume]
   quantityPercentage: null, // quantity-percentage
