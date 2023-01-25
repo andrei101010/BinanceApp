@@ -1,6 +1,6 @@
 // import basics
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 // import action
@@ -10,6 +10,7 @@ import { loginAction } from "../../store/actions/authAction";
 const Login = () => {
   // dispatch for redux
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // define states
   const [email, setEmail] = useState("");
@@ -18,6 +19,7 @@ const Login = () => {
   // form submit handle function
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(loginAction({ email, password }, navigate));
 
     // clear inputs
     setEmail("");

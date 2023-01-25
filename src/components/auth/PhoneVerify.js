@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+
+import { verifyAction } from "../../store/actions/authAction";
 
 // PhoneVerify Page
 const PhoneVerify = () => {
+  const dispatch = useDispatch(); // dispatch for redux
+  const navigate = useNavigate(); // navigate for move action
+
   // define states
   const [code, setCode] = useState("");
 
@@ -9,6 +16,7 @@ const PhoneVerify = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    dispatch(verifyAction({ code }));
     // clear input
     setCode("");
   };
@@ -19,7 +27,7 @@ const PhoneVerify = () => {
       <form className="verify-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          className="code"
+          className="select-box"
           value={code}
           placeholder="Enter Code"
           onChange={(e) => setCode(e.target.value)}

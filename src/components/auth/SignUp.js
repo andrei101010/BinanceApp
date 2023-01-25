@@ -2,23 +2,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 // import action
 import { registerAction } from "../../store/actions/authAction";
 
 // Signup Page
 const SignUp = () => {
-  // dispatch for redux
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // dispatch for redux
+  const navigate = useNavigate(); // navigate for move action
 
   // define states
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [tel, setTel] = useState("");
   const [username, setUsername] = useState("");
+  const [tel, setTel] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(registerAction({ email, username, tel, password }, navigate));
 
     // clear inputs
     setEmail("");
@@ -61,6 +63,7 @@ const SignUp = () => {
           type="password"
           value={password}
           required
+          minLength={8}
           onChange={(e) => setPassword(e.target.value)}
         />
         <button className="signup-btn">Sign Up</button>
