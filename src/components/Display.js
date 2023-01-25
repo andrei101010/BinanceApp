@@ -6,7 +6,7 @@ import { createChart, ColorType } from "lightweight-charts";
 
 const SMA = require("technicalindicators").SMA;
 
-const Display = ({ data: { data }, settings }) => {
+const Display = ({ data: { data, order }, settings }) => {
   const tmp_data = [];
   for (let item of data) {
     let tmp = {
@@ -41,6 +41,18 @@ const Display = ({ data: { data }, settings }) => {
     });
     const candlestickSeries = chart.addCandlestickSeries();
     candlestickSeries.setData(tmp_data);
+
+    if (order.time !== undefined) {
+      candlestickSeries.setMarkers([
+        {
+          time: order.time,
+          position: "aboveBar",
+          color: "red",
+          shape: "arrowDown",
+        },
+      ]);
+    }
+
     const areaSeries = chart.addLineSeries();
     areaSeries.setData(data1);
     chart.timeScale().fitContent();
