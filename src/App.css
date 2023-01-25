@@ -151,19 +151,19 @@ body{
 }
 
 /*******************  Auth Pages  *********************/
-.login-container, .signup-container, .verify {
-  margin-top: 30px;
+.login-container, .signup-container, .verify, .apiinfo-container {
+  margin-top: 50px;
   text-align: center;
 }
 
-.login-form, .signup-form, .verify-form {
+.login-form, .signup-form, .verify-form, .apiinfo-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.login-form *, .signup-form *, .verify-form * {
+.login-form *, .signup-form *, .verify-form *, .apiinfo-form * {
   margin-top: 30px;
 }
 
