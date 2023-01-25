@@ -31,7 +31,7 @@ const Trade = ({
           className="next-btn"
           onClick={() => {
             setStop(!stop);
-            // setInterval(() => start_bot(data, settings), 1000);
+            setInterval(() => start_bot(data, settings), 1000);
           }}
         >
           {!stop ? "Place a trade" : "Stop"}
